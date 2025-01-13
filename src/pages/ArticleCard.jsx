@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addComment } from '../store/articleSlice';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function ArticleCard() {
     const articles = useSelector((state) => state.article.articles);
@@ -19,6 +21,7 @@ function ArticleCard() {
             dispatch(addComment({ id, comment: newComment[id] }));
             setNewComment((prev) => ({ ...prev, [id]: '' }));
         }
+        toast.success("Comment qoshildi!!!");
     };
 
     const toggleComments = (id) => {
@@ -27,6 +30,7 @@ function ArticleCard() {
 
     return (
         <div className="space-y-4 mt-8">
+                  <ToastContainer />
             {articles.length > 0 &&
                 articles.map((value) => (
                     <div

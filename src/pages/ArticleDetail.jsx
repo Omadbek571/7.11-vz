@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { updateArticle } from '../store/articleSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 function ArticleDetail() {
   const { id } = useParams();
@@ -14,23 +16,29 @@ function ArticleDetail() {
   const [newTitle, setNewTitle] = useState('');
 
   if (!article) {
-    return <div>Malumot yoq</div>;
+    return <div>Malumot yo'q</div>;
   }
 
   const handleUpdate = () => {
     dispatch(updateArticle({ id: article.id, newTitle }));
     setModalOpen(false);
+
+    toast.success("Yangilandi malumot!!!");
   };
 
   function handleArtCard() {
-    navigate("/")
+    navigate("/");
   }
 
   return (
     <div>
+      <ToastContainer />
+
       <div className='flex justify-between'>
-        <h2 onClick={handleArtCard} className='font-bold p-2 text-xl'>ARTICLECARD</h2>
-        <h2 className='font-bold p-2 text-2xl'>ARTICLEDETAILES</h2></div>
+        <h2 onClick={handleArtCard} className='font-bold p-2 text-xl cursor-pointer'>ARTICLECARD</h2>
+        <h2 className='font-bold p-2 text-2xl'>ARTICLEDETAILES</h2>
+      </div>
+
       <div className="p-4 border-4 rounded-md">
         <h2 className="text-2xl font-bold text-gray-800">{article.title}</h2>
         <p className="text-gray-700 mt-4">{article.content}</p>

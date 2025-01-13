@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { addArticles } from '../store/articleSlice';
+import { ToastContainer, toast } from 'react-toastify';
 
 function CreateArticle() {
   const tasksRef = useRef();
@@ -12,10 +13,13 @@ function CreateArticle() {
       dispatch(addArticles(newArticleTitle)); 
       tasksRef.current.value = ''; 
     }
+     toast.success("Malumot qoshildi");
   }
 
   return (
     <div className="flex flex-col items-center space-y-4 mt-8">
+              <ToastContainer />
+        
       <input
         ref={tasksRef}
         type="text"
